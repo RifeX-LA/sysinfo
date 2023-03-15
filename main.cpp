@@ -28,16 +28,17 @@ int main(int argc, char* argv[]) {
         return 0;
 	}
 
+    if (vm.count("size")) {
+        std::locale::global(std::locale("en_US.UTF-8"));
+        flow::sysinfo::options::print_sizes(vm);
+        return 0;
+    }
+
     flow::sysinfo::options::apply_flags(vm, info_table);
     info_table.print();
 
     if (vm.count("json")) {
         flow::sysinfo::options::write_json(vm, info_table);
-    }
-
-    if (vm.count("size")) {
-        std::locale::global(std::locale("en_US.UTF-8"));
-        flow::sysinfo::options::print_sizes(vm);
     }
 
 	return 0;

@@ -21,7 +21,7 @@ namespace flow::sysinfo {
 
 		void print() const override {
 			std::cout << std::format("Name: {}\n", name);
-			std::cout << std::format("State: {}\n", state);
+			std::cout << std::format("State: {} ({:b})\n", state, state);
 		}
 
         [[nodiscard]] boost::property_tree::ptree json() const override {

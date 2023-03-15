@@ -63,11 +63,16 @@ namespace flow::sysinfo::options {
     void print_sizes(const boost::program_options::variables_map& vm) {
         namespace fs = std::filesystem;
 
-        auto pathes = vm["size"].as<std::vector<std::string>>();
+        auto paths = vm["size"].as<std::vector<std::string>>();
         std::cout << "Sizes:\n";
-        for (auto&& path : pathes) {
-            std::size_t size = fs::is_directory(path) ? dir_size(path) : fs::file_size(path);
-            std::cout << std::format("{}: {:L} bytes\n", path, size);
+        for (auto&& path : paths) {
+            if (fs::exists(path)) {
+                std::size_t size = fs::is_directory(path) ? dir_size(path) : fs::file_size(path);
+                std::cout << std::format("{}: {:L} bytes\n", path, size);
+            }
+            else {
+                std::cout << std::format("{}: not exists\n", path);
+            }
         }
     }
 

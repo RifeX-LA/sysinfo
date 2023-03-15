@@ -6,6 +6,8 @@ This is a C++ application to get information about FW, AV, updates and hardware.
 
 ## Usage
 
+By default, program shows all the information. But the following options are available:
+
 1. Configure, what info you want to see with flags.
     
     For example to see only cpu and firewall info run
@@ -26,7 +28,7 @@ This is a C++ application to get information about FW, AV, updates and hardware.
     sysinfo.exe --json=<output filename>
     ```
 
-3. Get size of directory of file (via `-s` or `--size` flag):
+3. Get size of a directory or a file (via `-s` or `--size` flag):
     ```
     sysinfo.exe -s <filename> -s <directory name> ...
     ```
@@ -40,7 +42,7 @@ This is a C++ application to get information about FW, AV, updates and hardware.
 
 ## Build
 
-Configure `CMakeLists.txt` in project directory by setting BOOST_ROOT variable to path, where boost_"ver" directory is located. For example:
+Configure `CMakeLists.txt` in project directory by setting `BOOST_ROOT` variable to path, where the boost_"ver" directory is located. For example:
 ```cmake
 set(BOOST_ROOT "C:/")
 ```
