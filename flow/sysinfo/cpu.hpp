@@ -8,10 +8,10 @@
 namespace flow::sysinfo {
 
 	struct cpu_t : sysinfo_base {
-		int cores;
-		int load;
+		unsigned cores;
+		unsigned load;
 
-		cpu_t(int c, int l) noexcept: cores(c), load(l) {}
+		cpu_t(unsigned c, unsigned l) noexcept: cores(c), load(l) {}
 
 		void print() const override {
 			std::cout << "CPU:\n";

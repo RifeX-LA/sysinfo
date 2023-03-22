@@ -5,7 +5,7 @@
 
 namespace flow::sysinfo::detail {
 
-    std::string download_mode_to_str(AutoDownloadMode mode) {
+    std::string download_mode2str(AutoDownloadMode mode) {
         switch (mode) {
             case adLetWindowsUpdateDecide:
                 return "Let Windows update decide";

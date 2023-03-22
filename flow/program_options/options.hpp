@@ -34,8 +34,8 @@ namespace flow::sysinfo::options {
 		return {std::move(desc), std::move(vm)};
 	}
 
-    std::size_t dir_size(const std::filesystem::path& path) {
-        std::size_t size = 0;
+    std::uintmax_t dir_size(const std::filesystem::path& path) {
+        std::uintmax_t size = 0;
         for (auto&& entry : std::filesystem::recursive_directory_iterator(path)) {
             size += std::filesystem::file_size(entry);
         }
@@ -67,7 +67,7 @@ namespace flow::sysinfo::options {
         std::cout << "Sizes:\n";
         for (auto&& path : paths) {
             if (fs::exists(path)) {
-                std::size_t size = fs::is_directory(path) ? dir_size(path) : fs::file_size(path);
+                std::uintmax_t size = fs::is_directory(path) ? dir_size(path) : fs::file_size(path);
                 std::cout << std::format("{}: {:L} bytes\n", path, size);
             }
             else {

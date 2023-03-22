@@ -14,13 +14,14 @@ namespace flow::sysinfo {
 
 		void print() const override {
 			std::cout << "Updates:\n";
-			std::cout << std::format("Auto-download mode: {}\n", detail::download_mode_to_str(download_mode));
+			std::cout << std::format("Auto-download mode: {}\n", detail::download_mode2str(download_mode));
             std::cout << std::format("{:-<20}\n", "");
 		}
 
         [[nodiscard]] virtual boost::property_tree::ptree json() const override {
             boost::property_tree::ptree root;
-            root.add("Updates.auto-download mode", detail::download_mode_to_str(download_mode));
+            root.add("Updates.auto-download mode", detail::download_mode2str(download_mode));
+
             return root;
 		}
 	};

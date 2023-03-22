@@ -8,29 +8,30 @@
 namespace flow::sysinfo {
 
 	struct firewall_t : sysinfo_base {
-		bool is_enabled;
+		bool enabled;
 
-		explicit firewall_t(bool is_enabled) noexcept : is_enabled(is_enabled) {}
+		explicit firewall_t(bool is_enabled) noexcept : enabled(is_enabled) {}
 
 		void print() const override {
 			std::cout << "Firewall:\n";
-			std::cout << std::format("Is enabled: {}\n", is_enabled);
+			std::cout << std::format("Enabled: {}\n", enabled);
 			std::cout << std::format("{:-<20}\n", "");
 		}
 
         [[nodiscard]] boost::property_tree::ptree json() const override {
             boost::property_tree::ptree root;
-            root.add("Firewall.Is enabled", is_enabled);
+            root.add("Firewall.Enabled", enabled);
+
 			return root;
 		}
 	};
 
 	firewall_t firewall() {
-		VARIANT_BOOL is_enabled;
+		VARIANT_BOOL enabled;
 		auto fw_profile = detail::firewall_profile();
-		fw_profile->get_FirewallEnabled(&is_enabled);
+		fw_profile->get_FirewallEnabled(&enabled);
 
-		return firewall_t(is_enabled == VARIANT_TRUE);
+		return firewall_t(enabled == VARIANT_TRUE);
 	}
 
 } // namespace flow::sysinfo

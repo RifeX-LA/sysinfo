@@ -11,11 +11,11 @@
 namespace flow::sysinfo {
 
 	struct disk_t : sysinfo_base {
-		std::size_t total;
-		std::size_t available;
+		std::uintmax_t total;
+        std::uintmax_t available;
 		std::string name;
 
-		disk_t(std::size_t t, std::size_t a, std::string n) : total(t), available(a), name(std::move(n)) {}
+		disk_t(std::uintmax_t t, std::uintmax_t a, std::string n) : total(t), available(a), name(std::move(n)) {}
 
 		void print() const override {
 			std::cout << std::format("Name: {}\n", name);
@@ -28,6 +28,7 @@ namespace flow::sysinfo {
             root.add("Disk.name", name);
             root.add("Disk.total", total);
             root.add("Disk.available", available);
+
             return root;
 		}
 	};

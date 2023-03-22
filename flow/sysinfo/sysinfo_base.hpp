@@ -1,6 +1,5 @@
 #pragma once
 
-#include <utility>
 #include <boost/property_tree/ptree.hpp>
 
 namespace flow::sysinfo {

@@ -3,13 +3,8 @@
 #include <vector>
 #include <format>
 #include <iostream>
-#include <atlbase.h>
-#include <wbemidl.h>
 #include <flow/sysinfo/sysinfo_base.hpp>
 #include <flow/sysinfo/detail/antivirus.hpp>
-#include <flow/sysinfo/detail/releaser.hpp>
-
-#pragma comment(lib, "wbemuuid.lib")
 
 namespace flow::sysinfo {
 
@@ -78,14 +73,8 @@ namespace flow::sysinfo {
                 break;
             }
 
-            CComVariant cvtVersion;
-            object->Get(L"displayName", 0, &cvtVersion, nullptr, nullptr);
-            std::string name(CW2A(cvtVersion.bstrVal));
-
-            cvtVersion.Clear();
-            object->Get(L"productState", 0, &cvtVersion, nullptr, nullptr);
-
-           info.emplace_back(cvtVersion.intVal, std::move(name));
+            auto [state, name] = detail::antivirus_info(object);
+            info.emplace_back(state, std::move(name));
         }
 
         return antiviruses_t(std::move(info));
